@@ -1,7 +1,8 @@
 #!/bin/bash
 
-./install-docker.sh
 ./install-docker-compose.sh
+./install-docker.sh && docker-compose up -d --build
 
-echo ============================= starting containers =============================
-docker-compose up -d --build
+
+
+
