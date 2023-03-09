@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  nodeserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - 80:3000
+    depends_on:
+      mymongodb:
+        condition: service_healthy
+
+  mymongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile.mongo
+    hostname: mongodbhost
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: products
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok'
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  mongo-data: 
