@@ -1,7 +1,5 @@
 #!/bin/bash
-
-./install-docker-compose.sh
-./install-docker.sh && docker-compose up -d --build
+./install-docker.sh && ./install-docker-compose.sh && docker-compose up -d --build
 
 
 
