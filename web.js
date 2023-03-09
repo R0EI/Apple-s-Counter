@@ -16,7 +16,7 @@ mongoose.connect(DB_URI).then(() => {
 });
 
 app.get("/" , (req,res) => {
-    fruits.find({name: "apples"})
+    fruits.find({name: /apple/i})
       .then((myFruits) => {
         const totalQty = myFruits.reduce((acc, curr) => {
           return acc + curr.qty;
