@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile.web
     ports:
       - 80:3000
+    networks:
+      - frontend
+      - backend
     depends_on:
       mymongodb:
         condition: service_healthy
@@ -21,6 +24,8 @@ services:
       MONGO_INITDB_DATABASE: products
     volumes:
       - mongo-data:/data/db
+    networks:
+      - backend
     healthcheck:
       test: echo 'db.runCommand("ping").ok'
       interval: 10s
@@ -29,3 +34,10 @@ services:
 
 volumes:
   mongo-data: 
+  
+networks:
+  frontend:
+    name: frontend
+  backend:
+    name: backend
+    
